@@ -1,0 +1,48 @@
+SCI/
+├── .vscode/
+│   └── settings.json
+├── admin/
+│   ├── home.html
+│   ├── home.php
+│   └── logout.php
+├── api/
+│   └── auth.php
+├── classes/
+│   ├── Configuracao.php
+│   ├── Database.php
+│   ├── Post.php
+│   └── Usuario.php
+├── database/
+│   └── sci.sql
+├── estilos/
+│   ├── admin.css
+│   ├── posts.css
+│   └── style.css
+├── js/
+│   ├── admin.js
+│   ├── posts.js
+│   ├── render.js
+│   └── script.js
+├── posts/
+│   └── api.php
+├── uploads/
+│   └── posts/
+├── config.php
+├── index.html
+├── explicação2.txt
+├── explicações.txt
+└── README.md
+
+Legenda:
+- admin/: área restrita do painel administrativo
+- api/: endpoints para autenticação e comunicação com o backend
+- classes/: regras de negócio em PHP (PDO, autenticação, posts, configurações)
+- database/: script SQL do banco de dados
+- estilos/: folhas de estilo CSS
+- js/: scripts front-end para interação do usuário
+- posts/: endpoints para CRUD de posts
+- uploads/: arquivos enviados pelos usuários
+- config.php: configuração global do sistema e sessão
+- index.html: página pública inicial
+
+senha: admin password: 123456
