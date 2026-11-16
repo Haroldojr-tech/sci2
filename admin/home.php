@@ -1,0 +1,185 @@
+<?php
+require_once __DIR__ . '/../config.php';
+
+if (!usuarioLogado()) {
+    header('Location: ../index.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - SCI</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SCI - Sistema de Comunicação Integrada">
+  <meta property="og:description" content="Sistema de Comunicação Integrada do IFTO Campus Colinas">
+  <meta property="og:image" content="https://sci.gt.tc/logo.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:url" content="https://sci.gt.tc/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://sci.gt.tc/logo.png">
+  <link rel="icon" type="image/png" href="../logo.png">
+  <link rel="stylesheet" href="../estilos/style.css">
+  <link rel="stylesheet" href="../estilos/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.1/lottie.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Qwitcher+Grypen:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Molle:ital@1&family=Nabla&family=Reggae+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&family=Amatic+SC:wght@400;700&family=Anek+Telugu:wght@100..800&family=Anton&family=Bangers&family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat:wght@400..700&family=Changa:wght@200..800&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Dancing+Script:wght@400..700&family=Datatype:wght@100..900&family=Edu+VIC+WA+NT+Hand+Pre:wght@400..700&family=Gloria+Hallelujah&family=Indie+Flower&family=Jost:ital,wght@0,100..900;1,100..900&family=Kalam:wght@300;400;700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Kaushan+Script&family=Maven+Pro:wght@400..900&family=Orbitron:wght@400..900&family=Pacifico&family=Permanent+Marker&family=Rajdhani:wght@300;400;500;600;700&family=Righteous&family=Russo+One&family=Satisfy&family=Shadows+Into+Light&family=Shizuru&family=Teko:wght@300..700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Aldrich&family=Architects+Daughter&family=Bad+Script&family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Buda:wght@300&family=Cinzel+Decorative:wght@400;700;900&family=Coda:wght@400;800&family=Cutive+Mono&family=Darker+Grotesque:wght@300..900&family=Dongle&family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Fredericka+the+Great&family=Georama:ital,wght@0,100..900;1,100..900&family=Goldman:wght@400;700&family=Jura:wght@300..700&family=Michroma&family=Ms+Madi&family=Nanum+Pen+Script&family=Nixie+One&family=Nova+Square&family=Palanquin+Dark:wght@400;500;600;700&family=Parisienne&family=Poiret+One&family=Racing+Sans+One&family=Reem+Kufi:wght@400..700&family=Syncopate:wght@400;700&family=Whisper&family=ZCOOL+XiaoWei&family=Zeyada&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="admin-container">
+    <div class="admin-card">
+      <div class="admin-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+        </svg>
+      </div>
+      <h1 class="admin-title">Bem-vindo, <?= htmlspecialchars($_SESSION['usuario_nome'] ?: $_SESSION['usuario'] ?? 'Admin', ENT_QUOTES, 'UTF-8'); ?>!</h1>
+      <p class="admin-subtitle">Área administrativa restrita</p>
+      <div class="admin-info">
+        <div class="admin-stat">
+          <span class="number" id="postCount">0</span>
+          <span class="label">Posts</span>
+        </div>
+        <div class="admin-stat">
+          <span class="number">1</span>
+          <span class="label">Usuário</span>
+        </div>
+        <div class="admin-stat">
+          <span class="number">Ativo</span>
+          <span class="label">Status</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-card config-card">
+      <h2 class="form-title">Período de Exibição no Site</h2>
+      <form id="configForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Data Inicial</label>
+            <input type="date" id="configStartDate">
+          </div>
+          <div class="form-group">
+            <label>Data Final</label>
+            <input type="date" id="configEndDate">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="form-submit">Salvar Período</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <h2 class="form-title">Cadastrar Novo Usuário</h2>
+      <form id="userForm">
+        <div class="form-group">
+          <label>Nome Completo</label>
+          <input type="text" id="userName" placeholder="Ex: João da Silva" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Usuário</label>
+            <input type="text" id="userLogin" placeholder="Ex: joao.silva" required>
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="userEmail" placeholder="Ex: joao@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" id="userPassword" placeholder="Digite a senha" required>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="form-submit">Cadastrar Usuário</button>
+        </div>
+      </form>
+
+      <div style="margin-top: 20px;">
+        <h3 style="color: white; margin-bottom: 10px;">Usuários cadastrados</h3>
+        <ul id="usersList" style="list-style: none; padding: 0; margin: 0; color: white;"></ul>
+      </div>
+    </div>
+
+    <div class="admin-card post-form-card">
+      <h2 class="form-title" id="formTitle">Criar Novo Post</h2>
+      <form id="postForm">
+        <input type="hidden" id="editId">
+
+        <div class="form-group">
+          <label>Imagem de Fundo (Upload Opcional)</label>
+          <input type="file" id="postImage" accept="image/*">
+        </div>
+
+        <div class="form-group">
+          <label>Título do Post</label>
+          <input type="text" id="postTitle" placeholder="Ex: Edital para Cursos de Graduação" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Data de Postagem</label>
+            <input type="date" id="postDate" required>
+          </div>
+          <div class="form-group">
+            <label>Link do Botão Abrir</label>
+            <input type="url" id="postLink" placeholder="Ex: https://ifto.edu.br/noticia" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Ícone</label>
+          <select id="postIcon">
+            <option value="logo">Logo IFTO</option>
+            <option value="clock">Relógio</option>
+            <option value="calendar">Calendário</option>
+            <option value="secretary">Secretária</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="form-submit" id="submitBtn">Criar Post</button>
+          <button type="button" class="form-cancel" id="cancelEdit" style="display:none;">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="admin-card posts-list-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <h2 class="form-title" style="margin:0;">Posts Criados</h2>
+        <input type="text" id="adminSearchInput" placeholder="Pesquisar posts..." style="padding: 8px 12px; border-radius: 20px; border: 1px solid #4bf1fb; background: rgba(255, 255, 255, 0.1); color: white; outline: none; flex: 1; max-width: 250px;">
+      </div>
+      <div id="postsList" style="margin-top: 20px;"></div>
+      <div class="pagination-controls" style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
+        <button id="prevPageBtn" class="form-cancel" style="padding: 10px 20px;">Anterior</button>
+        <span id="pageInfo" style="color: white;">Página 1</span>
+        <button id="nextPageBtn" class="form-submit" style="padding: 10px 20px;">Próxima</button>
+      </div>
+    </div>
+
+    <a href="logout.php" class="logout-btn">Sair (Logout)</a>
+  </div>
+
+  <script src="../js/posts.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+
+</html>
